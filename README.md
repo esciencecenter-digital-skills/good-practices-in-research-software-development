@@ -3,7 +3,7 @@ Teaches tools and skills that greatly increase software development quality and 
 NB: This lesson overlaps largely with [CodeRefinery](https://coderefinery.org/lessons/)
 
 ## Syllabus
-1. Introduction: Why and how to write good code (0:15 hours)
+1. [Introduction: Why and how to write good code (0:15 hours)](./episodes/01-intro.md)
 2. Introduction to git (3:12 hours)
 3. Collaboration with git and Github (3:00 hours)
 4. Modular code development (2:00 hours)
