@@ -3,7 +3,7 @@
 15 min
 
 ## Introduction
-Use [these slides](../files/how-to-write-good-code introduction slides.pptx) to introduce the workshop.
+Use [these slides](../files/01-introduction-slides.pptx) to introduce the workshop.
 
 This workshop will teach you how to do software engineering instead of scripting/programming.
 We will teach you tools and skills that will help you increase development speed over time 
