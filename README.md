@@ -1,4 +1,4 @@
-# How to write good code? lesson
+# How to write good code? workshop
 During 'How to write good code' workshops, researchers learn best software practices skills to facilitate open and reproducible research. 
 The workshops focus on methods to build modular, reusable, maintainable, sustainable, reproducible, testable, and robust software.
 
