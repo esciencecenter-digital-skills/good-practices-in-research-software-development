@@ -1,4 +1,8 @@
 # Introduction to 'How to write good code'
+#### Timing
+15 min
+
+## Introduction
 Use [these slides](../files/how-to-write-good-code introduction slides.pptx) to introduce the workshop.
 
 This workshop will teach you how to do software engineering instead of scripting/programming.

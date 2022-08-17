@@ -1,5 +1,6 @@
 # Collaborative version control with git and Github
-The instructor can use [these slides](../files/03-collaborative-version-control-coderefinery.pptx) as a guidance.
+#### Timing
+3:00 hours
 
 ### Questions
 * How can we collaborate with others within one repository?
@@ -9,6 +10,8 @@ The instructor can use [these slides](../files/03-collaborative-version-control-
 * What is code review?
 
 ### Instructor notes
+The instructor can use [these slides](../files/03-collaborative-version-control-coderefinery.pptx) as a guidance.
+
 Teaching is done as a pair of instructors. 
 Instructor A acts as the owner of the repository, instructor B as a collaborator (internal or external).
 

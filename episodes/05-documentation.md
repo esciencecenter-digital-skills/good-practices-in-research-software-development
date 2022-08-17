@@ -1,4 +1,7 @@
 # Documentation
+#### Timing
+1:00 hour
+
 ### Instructor notes
 The main purpose of this lesson is to make sure participants understand that DOCUMENTATION IS IMPORTANT. 
 The goal is more to trigger participants then to teach them all the different ways one could document a project.

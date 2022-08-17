@@ -1,4 +1,8 @@
 # Introduction to git
+#### Timing
+3:12 hours
+
+### Instructor Notes
 Lesson material: https://swcarpentry.github.io/git-novice/ 
 
 NB: Optional day before the course starts for participants who don’t know the git basics yet.

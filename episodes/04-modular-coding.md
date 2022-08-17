@@ -1,4 +1,7 @@
 # Modular code development
+#### Timing
+2:00 hours
+
 ### Instructor Notes
 Use [these slides](../files/04-modular-coding-slides.svg) to explain the topic of modular code development 
 (NB the slides are very visual so you need to create your own story around it). 

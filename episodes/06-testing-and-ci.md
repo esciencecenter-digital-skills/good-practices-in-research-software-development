@@ -1,4 +1,6 @@
 # Testing and Continuous Integration
+#### Timing
+2:30 hours
 
 ### Instructor Notes
 * Use [these slides](../files/06-testing-slides.pdf) to introduce testing.
