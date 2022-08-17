@@ -1,5 +1,7 @@
 # How to write good code? lesson
-Teaches tools and skills that greatly increase software development quality and speed.
+During 'How to write good code' workshops, researchers learn best software practices skills to facilitate open and reproducible research. 
+The workshops focus on methods to build modular, reusable, maintainable, sustainable, reproducible, testable, and robust software.
+
 NB: This lesson overlaps largely with [CodeRefinery lessons](https://coderefinery.org/lessons/).
 
 ## Syllabus
@@ -25,3 +27,6 @@ NB: This lesson overlaps largely with [CodeRefinery lessons](https://coderefiner
 ### Half-day 4
 1. Testing and continuous integration
 2. Wrap up
+
+## Exercises document
+You can use [the exercises document](files/excercises-document.md)

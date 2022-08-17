@@ -6,8 +6,8 @@
 Use [these slides](../files/01-introduction-slides.pptx) to introduce the workshop.
 
 This workshop will teach you how to do software engineering instead of scripting/programming.
-We will teach you tools and skills that will help you increase development speed over time 
-and create higher quality software.
+We teach you software practices skills to facilitate open and reproducible research. 
+The workshop focuses on methods to build modular, reusable, maintainable, sustainable, reproducible, testable, and robust software.
 
 See below plot (also in the slides)
 
