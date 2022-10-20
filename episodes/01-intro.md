@@ -1,4 +1,4 @@
-# Introduction to 'How to write good code'
+# Introduction to 'Good Practices in Research Software Development'
 #### Timing
 15 min
 
