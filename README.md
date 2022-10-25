@@ -1,5 +1,5 @@
 # Good Practices in Research Software Development lesson
-During 'Good Practices in Research Software Development' workshops, researchers learn best software practices skills to facilitate open and reproducible research. 
+During 'Good Practices in Research Software Development' workshops, researchers learn good software practices and skills to facilitate open and reproducible research. 
 The workshops focus on methods to build modular, reusable, maintainable, sustainable, reproducible, testable, and robust software.
 
 NB: This lesson overlaps largely with [CodeRefinery lessons](https://coderefinery.org/lessons/).
