@@ -60,8 +60,6 @@ Second we show distributed workflow. All in the browser using Github:
 - Clone your forked repo to your computer
 - Make some changes, use a somewhat real-world example so it makes sense to review it (but don't overdo it).
 - Push it to your fork
-- Make a change and commit it to the main branch
-- push the changes
 - make a pull request from your fork to the main repository mentioning the issue
 - Consider turning your Pull Request into a draft Pull Request.
 - let your code be reviewed by tagging the repo owner using (@Username)
