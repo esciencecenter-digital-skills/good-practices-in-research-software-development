@@ -42,20 +42,21 @@ Modifications can be made in a targeted way, without unexpected (disastrous) con
 
 ## How do we make code more modular?
 
+This process can be done iteratively: modules are built up of smaller modules, which are built up of... etc.
+
 ### Identify processes and functions
 Break the project down into sub-steps and sub-tasks.
-This can be done iteratively.
 
-### 
-Create a new module for each function or process you identified in step 1. This can be done by creating a new file for each module, and then copying the relevant code into each file.
+### Create modules
+Create functions, classes, or even full packages for processes and functions identified in step 1. Move existing code into this structure.
 
-Refactor the code in each module to make it as self-contained as possible. This may involve removing any dependencies on external code or data, and making sure that each module only performs the tasks that it is specifically designed to handle.
+### Refactor
+Refactor the code in each module to make it as self-contained as possible. For example, remove dependencies on external code or data where possible.
+Clearly define the task that a module should do, and edit away any other functionality.
 
-Test each module individually to make sure it is working properly. This will help to ensure that the modularization process has not introduced any new errors or bugs into the code.
-
-Once all of the modules have been tested, integrate them back into the main codebase. This may require making some changes to the main code to ensure that it can properly access and use the different modules.
-
-By following these steps, you can create a modular codebase that is easier to understand, maintain, and modify. This can save a lot of time and effort for you and your team, and can help to improve the quality and reliability of your code.
+### Test
+Test each module individually to ensure no errors or bugs are creeping in.
+Use tests also to again look critically at the function that should be performed by a module.
 
 
 ## Do One Thing (and do it well)
@@ -130,6 +131,7 @@ def fahrenheit_to_celsius_bad(temp_f):
 ```
 
 ## Pure functions are easier to
+
 - Test
 - Understand
 - Reuse
@@ -139,6 +141,7 @@ def fahrenheit_to_celsius_bad(temp_f):
 - Compose
 
 ## Divide and conquer
+
 - Split the code up
 - Construct your program from parts:
   - functions
@@ -149,13 +152,10 @@ def fahrenheit_to_celsius_bad(temp_f):
 
 - Avoid using complex data structures or algorithms
 - Instead, try to use simple, built-in data types and functions whenever possible.
-
 - Use clear and consistent indentation and naming conventions
 - Use descriptive and meaningful names for your variables, functions, and other code elements.
-
 - Avoid using global variables whenever possible
 - Instead, use local variables and functions to isolate and manage your data.
-
 - Avoid using complex or nested control flow statements
 - Instead, try to break your code down into smaller, simpler pieces that can be handled separately.
 
