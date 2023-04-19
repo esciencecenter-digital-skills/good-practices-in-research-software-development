@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="70.186234mm"
+   height="846.11987mm"
+   viewBox="0 0 70.186234 846.11987"
+   version="1.1"
+   id="svg3661"
+   inkscape:version="1.0.2 (1.0.2+r75+1)"
+   sodipodi:docname="yellow_strip.svg">
+  <defs
+     id="defs3655">
+    <clipPath
+       id="clip2">
+      <path
+         d="M 595,0.105469 H 795 V 621 H 595 Z m 0,0"
+         id="path325" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.29270548"
+     inkscape:cx="-110.07116"
+     inkscape:cy="1722.1353"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="2560"
+     inkscape:window-height="1412"
+     inkscape:window-x="2560"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3658">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-48.951673,660.94265)">
+    <path
+       style="clip-rule:nonzero;fill:#ffb213;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.352778"
+       d="m 83.98829,-660.94265 h 0.113 c 19.35042,0 35.03662,15.68621 35.03662,35.03662 V 185.17723 H 48.951673 v -811.08326 c 0,-19.35041 15.68621,-35.03662 35.036617,-35.03662"
+       id="path1956"
+       sodipodi:nodetypes="cssccsc" />
+  </g>
+</svg>

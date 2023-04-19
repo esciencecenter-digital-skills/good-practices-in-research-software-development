@@ -1,0 +1,231 @@
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11"/>
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="reveal.js/css/theme/black.css">
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css" />
+    <link rel="stylesheet" href="reveal.js/css/custom-gc.css" />
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section>
+    <h3>Embed interactive D3 visualizations</h3>
+    <div class="row no-margin-top">
+        <div class="col-50">
+            <p>Embed D3 visualizations into slides, and keep the original interactivity.</p>
+            <p>(click on the globe and drag it to explore the different paths!)</p>
+            <p><span class="u">Visualization:</span><br><a href='https://bl.ocks.org/Fil/63366253a5d2f00640c15b096c29a38c' target='_blank'>Eclipses path</a> by Philippe Riviere and friends</p>
+            <p class="small">(Press right arrow or space bar to navigate to next slide)</p>
+        </div>
+        <div class="col-50 fig-container no-margin-top" data-file="d3-fig/eclipses.html">
+    </div>
+  </div>
+</section>
+
+<section class="fig-container"
+         data-file="d3-fig/collision-detection.html" style="overflow: visible">
+    <h3>Embed interactive D3 visualizations</h3>
+    <div class='fancy-border' style="position: absolute; width:80%; left: 100px; top: 250px">
+        You can also embed visualization into the background
+    </div>
+    <p style="position: absolute; left: 100px; top: 550px">
+        (press right/left arrows to trigger visualization transitions)
+    </p>
+    <p style="position: absolute; left: 100px; top: 600px">
+        Visualization adapted from <a href='https://bl.ocks.org/mbostock/3231298' target='_blank'>Collision detection</a> by Mike Bostock</p>
+</section>
+
+<section class="fig-container"
+         data-file="d3-fig/collision-detection.html" data-no-background>
+    <h3>Embed interactive D3 visualizations</h3>
+    <div class='fancy-border' style="position: absolute; width:80%; left: 100px; top: 250px; color: #FF5733">
+        Add the "data-no-background" attribute to limit the background to the slide area
+    </div>
+    <p style="position: absolute; left: 100px; top: 550px">
+        (press right/left arrows to trigger visualization transitions)
+    </p>
+    <p style="position: absolute; left: 100px; top: 600px">
+        Visualization adapted from <a href='https://bl.ocks.org/mbostock/3231298' target='_blank'>Collision detection</a> by Mike Bostock</p>
+</section>
+
+<section>
+    <h3>Multi-visualizations are supported</h3>
+    <div class="row no-margin-top">
+        <div class="col-50 no-margin-top">
+            <p class="no-margin-top small">
+            <a href='https://bl.ocks.org/olearym/ec27b9ac1bf0da42ed8a0d533181693b' target='_blank'>Gooey effect - Hexagon</a> by Nadieh Bremer</p>
+            <div class="fig-container no-margin-top" data-file="d3-fig/gooey.html"></div>
+        </div>
+        <div class="col-50 no-margin-top">
+            <p class="no-margin-top small">
+            <a href='https://bl.ocks.org/olearym/ec27b9ac1bf0da42ed8a0d533181693b' target='_blank'>Modular Multiplication Circle</a> by Megan O'Leary</p>
+            <div class="fig-container no-margin-top" data-file="d3-fig/modular-multiplication.html"></div>
+        </div>
+</section>
+
+<section>
+    <h3>Compatible with Reveal.js's lazy loading</h3>
+    <div class="row no-margin-top">
+        <div class="col-50 no-margin-top">
+            <p class="no-margin-top small"> Not preloaded </p>
+            <div class="fig-container no-margin-top" data-file="d3-fig/gooey.html"></div>
+        </div>
+        <div class="col-50 no-margin-top">
+            <p class="no-margin-top small"> Preloaded </p>
+            <div class="fig-container no-margin-top" data-file="d3-fig/gooey.html" data-preload></div>
+        </div>
+</section>
+
+<section>
+    <h3>Independent transitions</h3>
+    <div class="row no-margin-top">
+        <div class="col-50 no-margin-top">
+            <p class="no-margin-top small">
+                <a href='https://bl.ocks.org/mbostock/4165404' target='_blank'>Rainbow worm</a> by Mike Bostock <br>
+                <span class="big">(transition on <span class="warning">1</span> and <span class="warning">3</span> and automatic transition on slide change)</span>
+            </p>
+            <div class="fig-container no-margin-top" data-preload data-file="d3-fig/rainbow.html"></div>
+        </div>
+        <div class="col-50 no-margin-top">
+            <p class="no-margin-top small">
+                Simple bar graph <br>
+                <span class="big">(transition on <span class="warning">2</span> and <span class="warning">3</span>)</span></p>
+        <div class="fig-container no-margin-top" data-file="d3-fig/bar-chart.html"></div>
+    </div>
+    <div class="no-margin-top" style="position: absolute; top: 550px">
+        <p>
+            Stage transitions independently for each visualization using Reveal.js 'data-fragment-index' (press right arrow or space)
+        </p>
+    </div>
+</section>
+
+<section>
+    <h3>Interaction with other elements</h3>
+
+    <div class="row no-margin-top">
+        <div class="col-50 no-margin-top left">
+            <p class="small">You can interact with the embedded visualization using elements from the slide.</p>
+            <p class="small">Click on the button to change the color of the nodes to yellow</p>
+            <button class="btn-large btn-warning" id="recolorButton">Recolorize</button>
+            <p class="small">Note: the staged transitions are still active (press right arrow or space)</p>
+        </div>
+        <div class="col-50 no-margin-top">
+        <div class="fig-container no-margin-top" data-file="d3-fig/collision-detection.html"></div>
+    </div>
+</section>
+
+<section>
+    <h3>Works with other libraries too</h3>
+    <p class="no-margin-top">Those are embedded <a href='https://emeeks.github.io/semiotic/#/' target='_blank'>semiotic</a> figures!</p>
+    <p class="small" style="position: absolute; top: 550px">(press right arrow to trigger an animation on the bar)</p>
+    <div class="row no-margin-top">
+        <div class="col-45">
+            <p class="small no-margin-top">(<a href='https://emeeks.github.io/semiotic/#/semiotic/creatingbarchart' target='_blank'>Simple bar chart example</a>)</p>
+            <div class="fig-container" data-file="d3-fig/semiotic-animated-bar.html" data-preload></div>
+        </div>
+        <div class="col-55 no-margin-top">
+            <p class="small no-margin-top">(<a href='https://emeeks.github.io/semiotic/#/semiotic/chord' target='_blank'>Chord diagram example</a>)</p>
+            <div class="fig-container" data-file="d3-fig/semiotic-chord.html" data-preload></div>
+        </div>
+  </div>
+</section>
+
+<section>
+    <h3>Works with other libraries too (2)</h3>
+    <p class="no-margin-top">This is an embedded <a href='https://vega.github.io/vega-lite/' target='_blank'>vega-lite</a> figure! (with tooltip enabled)</p>
+    <div class="fig-container" data-file="d3-fig/vega-lite-scatter.html" data-preload></div>
+</section>
+
+<!-- Include a beautiful website directly in your presentation -->
+<section>
+  <h3>Insert website pages</h3>
+  <div class="row" style="margin-top: 0">
+      <div class="col-100">
+        <p>Full website. <br>Note: it's scrollable!</p>
+        <div class="fig-container" style="height: 400px;"
+         data-file="https://gcalmettes.github.io/bootstrap-tools/" 
+         data-scrollable="yes">
+        </div>  
+      </div>
+  </div>
+</section>
+
+<!-- Include a beautiful website directly in your presentation -->
+<section class="fig-container"
+         data-file="https://gcalmettes.github.io/bootstrap-tools/">
+    <div style="width: 50%; margin-left: 45% !important; background-color: #777777; font-size: 0.75em; border-radius: 20px;">
+        Embed websites in the background too
+    </p>
+</section>
+
+<!-- same than above but no scrolling -->
+<section class="fig-container"
+         data-file="https://gcalmettes.github.io/bootstrap-tools/"
+         data-style="scrolling:no"
+         data-scroll="no">
+    <div style="width: 50%; margin-left: 45% !important; background-color: #6833FF; font-size: 0.75em; border-radius: 20px;">
+        Scrolling deactivated via the data-scroll="no" option
+    </p>
+</section>
+
+</div> <!-- slides -->
+</div> <!-- Reveal -->
+
+<script src="reveal.js/js/reveal.js"></script>
+<script>
+
+// Full list of configuration options available at:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+    controls: false,
+    progress: true,
+    history: true,
+    center: false,
+    transition: 'fade',
+    viewDistance: 3, // to lazy load iframes
+
+    // // optional configurations for reveald3
+    reveald3: {
+
+         // If the previous slide is a slide further in the deck (i.e. we come back to
+         // slide from the next slide), by default the last fragment transition will be
+         // triggered to to get the last state of the visualization and simulate the
+         // the state the simulation was in when we left the slide. This can be
+         // discarded.
+         runLastState: true, //default true
+
+         // If a special onSlideChanged transition has been set (if for example the visualization
+         // has been preloaded using the data-preload attribute, and you want a specific transition
+         // to happen only when you arrive on the slide), you can choose the delay with which such 
+         // a transition will occur (note that in the case of no data-preload, if no delay is set then
+         // the transition might not occur since the iframe might not be fully loaded yet when the 
+         // function is triggered). // default 0. 
+         onSlideChangedDelay: 400,
+
+         // This will prefix the path attributes of the source html paths with the given path.
+         // (by default "src" if set to true or with the specified path if string)
+         mapPath: false, // default: false
+
+         // If true, will try to locate the file at a fallback url without the mapPath prefix in case no file is found
+         // at the stipulated url with mapPath
+         tryFallbackURL: false, //default false
+
+         // Checking for file existance has been reported to fail in rare 
+         // cases though files did exist. This option is to disable the file checking.
+         //see: https://github.com/gcalmettes/reveal.js-d3/issues/10
+         disableCheckFile: false, //default false,
+    },
+
+    // Reveal.js plugins
+    dependencies: [
+
+        { src: '../reveald3.js' },
+
+    ]
+});
+
+</script>
+</body>
+</html>

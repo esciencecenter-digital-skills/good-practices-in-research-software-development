@@ -1,0 +1,1492 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Good Practices in Research Software Development</title>
+
+    <meta name="description" content="git, collaboration, modularity">
+    <meta name="author" content="Barbara Vreede, Ole Mussmann">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="reveal.js/4.3.1/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="reveal.js/4.3.1/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="reveal.js/4.3.1/reveal.js/dist/theme/black.css" id="theme">
+    <!-- fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Assistant">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="reveal.js/4.3.1/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+
+    <!-- tweak colors and minor details -->
+    <link rel="stylesheet" href="reveal.js/custom_css/escience_4.3.1.css" id="theme">
+
+    <link rel="shortcut icon" type="image/png" href="./files/favicon-32x32.png"/>
+  </head>
+
+  <body onload="setTimeout(function(){addDecorations();}, 100);">
+    <div class="reveal">
+
+      <div id="hidden" style="display: none;">
+        <div id="decoration">
+          <div id="blue_pane_left" style="transition: opacity 1s; background-color: #009DDD; opacity: 0; position: absolute; left: 0; right: 50%; bottom: 0; top: 0; z-index: 2;"></div>
+          <div id="blue_pane_right" style="transition: opacity 1s; background-color: #009DDD; opacity: 0; position: absolute; left: 50%; right: 0; bottom: 0; top: 0; z-index: 2;"></div>
+          <div id="touch_pane" style="background-color: white; transition: opacity 1s; opacity: 0; position: absolute; left: 0; right: 66.6%; bottom: 0; top: 0; display: flex; align-items: center; justify-content: center; z-index: 2;">
+            <h1 style="color: black; text-align: left;">Let's stay<br>in touch</h1>
+          </div>
+          <div id="purple_half_circle_top" style="transition: top 1s; opacity: 1; position: absolute; background-color: #380339; left: 0; top: -17vw; width: 34vw; height: 17vw; border-radius: 0 0 20vw 20vw; z-index: 2;"></div>
+          <div id="yellow_half_strip" style="opacity: 1; transition: bottom 1s; position: absolute; background-color: #FFB213; right: 50%; bottom: -25vw; width: 17vw; height: 25vw; border-radius: 20vw 0 0 0; z-index: 2;"></div>
+          <div id="purple_strip_bottom" style="opacity: 1; transition: bottom 1s; position: absolute; background-color: #380339; right: calc(50% + 17vw); bottom: -10vw; width: 16vw; height: 10vw; border-radius: 20vw 20vw 0 0; z-index: 2;"></div>
+          <div id="logo_color" style="transition: opacity 1s, left 1s; opacity: 0; position: absolute; left: -12vw; top: 1.5vh; z-index: 2;">
+            <img style="width: 12vw;" src="./files/logo-fc.svg">
+          </div>
+          <div id="logo_part_white" style="transition: opacity 1s, left 1s; opacity: 0; position: absolute; left: -12vw; top: 1.5vh; z-index: 2;">
+            <img style="width: 12vw;" src="./files/logo-fc-part-white.svg">
+          </div>
+          <div id="logo_white" style="transition: opacity 1s, left 1s; opacity: 0; position: absolute; left: -12vw; top: 1.5vh; z-index: 2;">
+            <img style="width: 12vw;" src="./files/logo-fc-white.svg">
+          </div>
+          <div id="purple_overlay" style="background-color: #380339; opacity: 0; transition: opacity 1s; position: absolute; left: 0; right: 0; bottom: 0; top: 0; z-index: 1;">
+          </div>
+          <div id="blue_overlay" style="background-color: #009DDD; opacity: 0; transition: opacity 1s; position: absolute; left: 0; right: 0; bottom: 0; top: 0; z-index: 1;">
+          </div>
+          <div id="white_overlay" style="background-color: white; opacity: 0; transition: opacity 1s; position: absolute; left: 0; right: 0; bottom: 0; top: 0; z-index: 1;">
+          </div>
+          <div id="black_overlay" style="background-color: black; opacity: 0; transition: opacity 1s; position: absolute; left: 0; right: 0; bottom: 0; top: 0; z-index: 1;">
+          </div>
+          <div id="yellow_strip" style="background-color: #FFB213; transition: left 1s; width: 10vw; height: 70vh; border-radius: 10vw 10vw 0 0; z-index: 2; position: absolute; left: -10vw; bottom: 0;">
+          </div>
+          <div id="yellow_flag" style="background-color: #FFB213; transition: left 1s, bottom 1s; width: 10vh; height: 12vh; border-radius: 0 6vh 6vh 0; z-index: 3; position: absolute; left: -10vh; bottom: 5vh; margin: 0; padding: 0;">
+            <img id="left_e" src="./files/e-logo.svg" style="position: absolute; height: 10vh; margin: 1vh 0; padding: 0;"></img>
+          </div>
+          <div id="purple_half_circle_bottom" style="transition: bottom 1s; background-color: #380339; width: 20vw; height: 10vw; border-radius: 20vw 20vw 0 0; z-index: 2; position: absolute; left: 0; bottom: -10vw;">
+            <img id="left_e" src="./files/logo-fc-part-white.svg" style="position: absolute; bottom: 2vw; left: 6vw; width: 8vw;"></img>
+          </div>
+          <div id="purple_blob" style="transition: top 1s; position: absolute; display: flex; right: 0; top: -50vh; z-index: 2;">
+            <div style="background-color: #380339; width: 10vw; height: 25vh; border-radius: 0 0 10vw 10vw;">
+            </div>
+            <div style="background-color: #380339; width: 10vw; height: 50vh; border-radius: 0 0 10vw 10vw;">
+            </div>
+            <div class="box" style="background: #380339; position: absolute; right: 10vw; top: 0; width: 5vw; height: calc(25vh + 5vw); border-corner-shape: scoop; background: yellow; background: linear-gradient(45deg,  transparent 10vw, #380339 0) bottom left; background-image: radial-gradient(circle at 0 100%, rgba(204,0,0,0) 5vw, #380339 15px)">
+            </div>
+          </div>
+          <div id="blue_strip" style="background-color: #009DDD; transition: left 1s, right 1s; margin: 0; padding: 0; border-radius: 20vw 0 0 0; z-index: 2; position: absolute; right: -100vw; bottom: 0;">
+            <div id="footer" style="text-align: right; line-height: 130%; padding: 0; margin: 1vw 1vw 1vw 3vw; bottom: 0; right: 0;">
+            </div>
+          </div>
+          <img id="right_e" src="./files/letter-e.svg" style="transition: right 1s, top 1s; position: absolute; top: 10vh; right: -4vw; width: 4vw; z-index: 3;"></img>
+        </div>
+      </div>
+
+      <div class="slides">
+        <section data-markdown="00_title.md" data-separator=^\r?\n===\r?\n$ data-separator-vertical=^\r?\n---\r?\n$>
+<!--
+title: Good Practices in Research Software Development
+description: git, collaboration, modularity
+author: Barbara Vreede, Ole Mussmann
+version: 4.3.1
+plugins: RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealMenu, RevealNotes, RevealSearch, RevealZoom
+-->
+
+<!-- .slide: data-state="blue_overlay yellow_flag yellow_strip purple_half_circle_bottom purple_blob right_e_top" data-background-video="./files/Mood video Homepage 2.mp4" data-background-video-loop data-background-video-muted="true" -->
+
+# Good Practices in Research Software Development
+## Subtitle
+
+- [Modular Code](./04-modular-code)
+
+[Barbara Vreede](mailto:b.vreede@esciencecenter.nl) |  [Ole Mussmann](mailto:o.mussmann@esciencecenter.nl)
+
+
+===
+
+<!-- .slide: data-state="standard" -->
+
+# 04. Modular code
+
+
+<img width="900" alt="think in building blocks" src="https://user-images.githubusercontent.com/5747405/207459058-59c88b4c-1401-428f-b28a-0ac3e72bd964.png">
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+## What is modularity?
+- It is a way to organize and structure code
+- Software is 'built up' from smaller elements
+- Each element handles a specific (set of) task(s)
+- Elements are self-contained and independent
+
+Eventually, we want to build **complex behavior** from **simple components**
+
+Modularity does not imply simplicity, but is enabled by it
+
+===
+
+<!-- .slide: data-state="standard" -->
+
+## Why do we want code to be modular?
+### Maintenance
+Modular code is easier to read, understand, and therefore to maintain.
+An independent module can be debugged, changed, or optimized, without it being necessary to understanding the rest of the codebase.
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+### Reusability
+An independent module can live outside the context it was written for.
+It can be reused by another project, and serve a purpose in a different environment.
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+### Robustness
+Modules are prime targets for tests.
+A well defined module is easier to test, and therefore easier to debug or keep bug-free.
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+### Scalability
+Modular code keeps the complexity of a project low by design.
+This makes it easier to scale up without creating huge issues. 
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+### Innovation
+Modules increase the capabilities and power of a project, without increasing the complexity on a maintenance level.
+Rearranging old modules can lead to powerful new applications.
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+### Flexibility
+With code existing of independent modules, with low or absent interdependency, the codebase becomes flexible and amenable to change.
+Modifications can be made in a targeted way, without unexpected (disastrous) consequences.
+
+===
+
+<!-- .slide: data-state="standard" -->
+
+
+## How do we make code more modular?
+
+This process can be done iteratively: modules are built up of smaller modules, which are built up of... etc.
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+### Identify processes and functions
+Break the project down into sub-steps and sub-tasks.
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+### Create modules
+Create functions, classes, or even full packages for processes and functions identified in step 1. Move existing code into this structure.
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+### Refactor
+Refactor the code in each module to make it as self-contained as possible. For example, remove dependencies on external code or data where possible.
+Clearly define the task that a module should do, and edit away any other functionality.
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+### Test
+Test each module individually to ensure no errors or bugs are creeping in.
+Use tests also to again look critically at the function that should be performed by a module.
+
+===
+
+<!-- .slide: data-state="standard" -->
+
+## Do One Thing (and do it well)
+- One _function_ for one purpose
+- One _class_ for one purpose
+- One _package_ for one purpose
+
+===
+
+<!-- .slide: data-state="standard" -->
+
+## Don't Repeat Yourself
+
+- Write routines (i.e. code that gets reused) into functions
+- Identify potential functions by _action_: functions perform tasks (e.g. sorting, plotting, saving a file, transform data...)
+
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+## Functions are...
+- Functions are smaller code units reponsible of one task.
+- Functions are meant to be reused
+- Functions accept arguments (though they may also be empty!)
+- Functions generate output
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+## Functions do not...
+
+... necessarily make code shorter (at first)! Compare:
+
+```python=
+indexATG = [n for n,i in enumerate(myList) if i == 'ATG']
+indexAAG = [n for n,i in enumerate(myList) if i == 'AAG']
+```
+
+
+```python=
+def indexString(inputList,z):
+    zIndex = [n for n,i in enumerate(li) if i == z]
+    return zIndex
+    
+indexATG = indexString(myList,'ATG')
+indexAAG = indexString(myList,'AAG')
+```
+---
+
+<!-- .slide: data-state="standard" -->
+
+
+## When to make functions?
+
+Always.
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+## When to make more functions?
+- if you have too many levels of indentation
+- if a function gets too long
+- if a function does more than one thing
+- if you find it hard to name a function
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+## Keep your functions pure
+
+- Pure functions have no notion of state: They take input values and return values
+- Given the same input, a pure function always returns the same value
+
+Example: pure, no side effects
+```python=
+def fahrenheit_to_celsius(temp_f):
+    temp_c = (temp_f - 32.0) * (5.0/9.0)
+    return temp_c
+    temp_c = fahrenheit_to_celsius(temp_f=100.0)
+    print(temp_c)
+```
+
+Example: stateful, side effects
+```python=
+f_to_c_offset = 32.0
+f_to_c_factor = 0.555555555
+temp_c = 0.0
+def fahrenheit_to_celsius_bad(temp_f):
+    global temp_c
+    temp_c = (temp_f - f_to_c_offset) * f_to_c_factor
+    fahrenheit_to_celsius_bad(temp_f=100.0)
+    print(temp_c)
+```
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+## Pure functions are easier to
+
+- Test
+- Understand
+- Reuse
+- Parallelize
+- Simplify
+- Optimize
+- Compose
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+## Divide and conquer
+
+- Split the code up
+- Construct your program from parts:
+  - functions
+  - modules
+  - packages (Python) or libraries (C or or C++ or Fortran)
+
+---
+
+<!-- .slide: data-state="standard" -->
+
+## Keep it simple
+
+- Avoid using complex data structures or algorithms
+- Instead, try to use simple, built-in data types and functions whenever possible.
+- Use clear and consistent indentation and naming conventions
+- Use descriptive and meaningful names for your variables, functions, and other code elements.
+- Avoid using global variables whenever possible
+- Instead, use local variables and functions to isolate and manage your data.
+- Avoid using complex or nested control flow statements
+- Instead, try to break your code down into smaller, simpler pieces that can be handled separately.
+
+
+
+</section>
+<section data-markdown="04-modular-code.md" data-separator=^\r?\n===\r?\n$ data-separator-vertical=^\r?\n---\r?\n$>
+# 04. Modular code
+
+
+<img width="900" alt="think in building blocks" src="https://user-images.githubusercontent.com/5747405/207459058-59c88b4c-1401-428f-b28a-0ac3e72bd964.png">
+
+
+## What is modularity?
+- It is a way to organize and structure code
+- Software is 'built up' from smaller elements
+- Each element handles a specific (set of) task(s)
+- Elements are self-contained and independent
+
+Eventually, we want to build **complex behavior** from **simple components**
+
+Modularity does not imply simplicity, but is enabled by it
+
+## Why do we want code to be modular?
+### Maintenance
+Modular code is easier to read, understand, and therefore to maintain.
+An independent module can be debugged, changed, or optimized, without it being necessary to understanding the rest of the codebase.
+
+### Reusability
+An independent module can live outside the context it was written for.
+It can be reused by another project, and serve a purpose in a different environment.
+
+### Robustness
+Modules are prime targets for tests.
+A well defined module is easier to test, and therefore easier to debug or keep bug-free.
+
+### Scalability
+Modular code keeps the complexity of a project low by design.
+This makes it easier to scale up without creating huge issues. 
+
+### Innovation
+Modules increase the capabilities and power of a project, without increasing the complexity on a maintenance level.
+Rearranging old modules can lead to powerful new applications.
+
+### Flexibility
+With code existing of independent modules, with low or absent interdependency, the codebase becomes flexible and amenable to change.
+Modifications can be made in a targeted way, without unexpected (disastrous) consequences.
+
+
+## How do we make code more modular?
+
+This process can be done iteratively: modules are built up of smaller modules, which are built up of... etc.
+
+### Identify processes and functions
+Break the project down into sub-steps and sub-tasks.
+
+### Create modules
+Create functions, classes, or even full packages for processes and functions identified in step 1. Move existing code into this structure.
+
+### Refactor
+Refactor the code in each module to make it as self-contained as possible. For example, remove dependencies on external code or data where possible.
+Clearly define the task that a module should do, and edit away any other functionality.
+
+### Test
+Test each module individually to ensure no errors or bugs are creeping in.
+Use tests also to again look critically at the function that should be performed by a module.
+
+
+## Do One Thing (and do it well)
+- One _function_ for one purpose
+- One _class_ for one purpose
+- One _package_ for one purpose
+
+## Don't Repeat Yourself
+
+- Write routines (i.e. code that gets reused) into functions
+- Identify potential functions by _action_: functions perform tasks (e.g. sorting, plotting, saving a file, transform data...)
+
+## Functions are...
+- Functions are smaller code units reponsible of one task.
+- Functions are meant to be reused
+- Functions accept arguments (though they may also be empty!)
+- Functions generate output
+
+## Functions do not...
+
+... necessarily make code shorter (at first)! Compare:
+
+```python=
+indexATG = [n for n,i in enumerate(myList) if i == 'ATG']
+indexAAG = [n for n,i in enumerate(myList) if i == 'AAG']
+```
+
+
+```python=
+def indexString(inputList,z):
+    zIndex = [n for n,i in enumerate(li) if i == z]
+    return zIndex
+    
+indexATG = indexString(myList,'ATG')
+indexAAG = indexString(myList,'AAG')
+```
+
+## When to make functions?
+
+Always.
+
+## When to make more functions?
+- if you have too many levels of indentation
+- if a function gets too long
+- if a function does more than one thing
+- if you find it hard to name a function
+
+## Keep your functions pure
+
+- Pure functions have no notion of state: They take input values and return values
+- Given the same input, a pure function always returns the same value
+
+Example: pure, no side effects
+```python=
+def fahrenheit_to_celsius(temp_f):
+    temp_c = (temp_f - 32.0) * (5.0/9.0)
+    return temp_c
+    temp_c = fahrenheit_to_celsius(temp_f=100.0)
+    print(temp_c)
+```
+
+Example: stateful, side effects
+```python=
+f_to_c_offset = 32.0
+f_to_c_factor = 0.555555555
+temp_c = 0.0
+def fahrenheit_to_celsius_bad(temp_f):
+    global temp_c
+    temp_c = (temp_f - f_to_c_offset) * f_to_c_factor
+    fahrenheit_to_celsius_bad(temp_f=100.0)
+    print(temp_c)
+```
+
+## Pure functions are easier to
+
+- Test
+- Understand
+- Reuse
+- Parallelize
+- Simplify
+- Optimize
+- Compose
+
+## Divide and conquer
+
+- Split the code up
+- Construct your program from parts:
+  - functions
+  - modules
+  - packages (Python) or libraries (C or or C++ or Fortran)
+
+## Keep it simple
+
+- Avoid using complex data structures or algorithms
+- Instead, try to use simple, built-in data types and functions whenever possible.
+- Use clear and consistent indentation and naming conventions
+- Use descriptive and meaningful names for your variables, functions, and other code elements.
+- Avoid using global variables whenever possible
+- Instead, use local variables and functions to isolate and manage your data.
+- Avoid using complex or nested control flow statements
+- Instead, try to break your code down into smaller, simpler pieces that can be handled separately.
+
+
+</section>
+<section data-markdown="excercises-document.md" data-separator=^\r?\n===\r?\n$ data-separator-vertical=^\r?\n---\r?\n$>
+
+## Day 1 Version control 
+### Tracking changes exercise
+Exercise in breakout rooms. Write down your (individual) answers to the next 3 questions in the collaborative notebook.
+#### 1. Which command(s) below would save the changes of myfile.txt to my local Git repository?
+
+1. git commit -m "my recent changes"
+2. git init myfile.txt
+   git commit -m "my recent changes"
+3. git add myfile.txt
+   git commit -m "my recent changes"
+4. git commit -m myfile.txt "my recent changes"
+
+#### 2. Committing Multiple Files
+The staging area can hold changes from any number of files that you want to commit as a single snapshot.
+
+Add some text to ``mars.txt`` noting your decision to consider Venus as a base
+Create a new file ``venus.txt`` with your initial thoughts about Venus as a base for you and your friends
+Add changes from both files to the staging area, and commit those changes.
+
+#### 3. (optional) A new repository
+Create a new Git repository on your computer called bio.
+Write a three-line biography for yourself in a file called me.txt, commit your changes
+Modify one line, add a fourth line
+Display the differences between its updated state and its original state.
+
+### Exploring history exercise
+Exercise in breakout rooms. Write down your (individual) answers to the next 3 questions in the collaborative notebook.
+#### 1. Recovering Older Versions of a File
+Jennifer has made changes to the Python script that she has been working on for weeks, and the modifications she made this morning “broke” the script and it no longer runs. She has spent ~ 1hr trying to fix it, with no luck…
+
+Luckily, she has been keeping track of her project’s versions using Git! Which commands below will let her recover the last committed version of her Python script called `data_cruncher.py?`
+
+1. `$ git checkout HEAD`
+2. `$ git checkout HEAD data_cruncher.py`
+3. `$ git checkout HEAD~1 data_cruncher.py`
+4.  ` $ git checkout <unique ID of last commit> data_cruncher.py`
+5. Both 2 and 4
+    
+#### 2. Reverting a Commit
+
+Jennifer is collaborating on her Python script with her colleagues and realizes her last commit to the project’s repository contained an error and she wants to undo it. `git revert [erroneous commit ID]` will create a new commit that reverses Jennifer’s erroneous commit. Therefore `git revert` is different to `git checkout [commit ID]` because `git checkout` returns the files within the local repository to a previous state, whereas `git revert` reverses changes committed to the local and project repositories.
+Below are the right steps and explanations for Jennifer to use `git revert`, what is the missing command?
+
+1. `________ # Look at the git history of the project to find the commit ID`
+2. `Copy the ID (the first few characters of the ID, e.g. 0b1d055).`
+3. `git revert [commit ID]`
+4. Type in the new commit message.
+5. Save and close
+
+#### 3. Understanding Workflow and History
+
+What is the output of the last command in
+```
+$ cd planets
+$ echo "Venus is beautiful and full of love" > venus.txt
+$ git add venus.txt
+$ echo "Venus is too hot to be suitable as a base" >> venus.txt
+$ git commit -m "Comment on Venus as an unsuitable base"
+$ git checkout HEAD venus.txt
+$ cat venus.txt #this will print the contents of venus.txt to the screen
+```
+1. Venus is too hot to be suitable as a base
+2. Venus is beautiful and full of love
+3. Venus is beautiful and full of love
+4. Venus is too hot to be suitable as a base
+5. Error because you have changed venus.txt without committing the changes
+
+### Exercises for Ignoring Things
+#### Ignoring Nested Files
+Given a directory structure that looks like:
+```
+results/data
+results/plots
+```
+How would you ignore only `results/plots` and not `results/data`?
+
+#### (optional) Including Specific Files
+
+How would you ignore all `.dat` files in your root directory except for `final.dat`? Hint: Find out what `!` (the exclamation point operator) does
+
+### 'The remote' exercises
+#### GitHub GUI
+
+Browse to your `planets` repository on GitHub. Under the Code tab, find and click on the text that says “XX commits” (where “XX” is some number). Hover over, and click on, the three buttons to the right of each commit. What information can you gather/explore from these buttons? How would you get that same information in the shell?
+
+#### (optional) Push vs. Commit
+
+In this lesson, we introduced the `“git push”` command. How is `“git push”` different from `“git commit”`?
+
+
+
+## Day 2 Collaborative distributed version control
+
+
+
+### Exercise: Working as a project collaborator (in breakout rooms)
+
+- Log into Github and create a new repository
+- Make the repository public
+- clone it to your desktop
+- add some code
+- push the changes to the repository
+- Add one person as a collaborator (settings -> Manage Access). Make sure everyone in the group has a collaborator.
+- Create an issue in the repo where you are a collaborator
+- Clone that repo
+- make changes on a new branch
+- push the changes
+- submit a Pull Request
+- wait for approval
+- At the same time review a collaborators Pull Request
+- (Optionally) Learn about [protecting branches](https://docs.github.com/en/github/administering-a-repository/about-protected-branches) and try it out.
+
+### Exercise: Working as an external contributor (in breakout rooms)
+- Remove your group member(s) as collaborators from your repository
+- Fork another group members repo (Repository page, top right corner)
+- Create an issue on the original repository
+- Clone your forked repo to your computer
+- Make some changes, use a somewhat real-world example so it makes sense to review it (but don't overdo it).
+- Push it to your fork
+- Make a change and commit it to the main branch
+- push the changes
+- make a pull request from your fork to the main repository mentioning the issue
+- Consider turning your Pull Request into a draft Pull Request.
+- let your code be reviewed by tagging the repo owner using (@Username)
+- At the same time review Pull Request using comments on individual lines. Try to act as if it was a real peer review as much as possible.
+- Accept or reject the Pull Request
+- (Optionally) learn about [merge conflicts](https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts) and try it out in your collaboration.
+
+
+## Day 3 Documentation
+## Day 3: Documentation lesson
+
+
+### Exercise: Think of good and bad examples 
+Write down your thoughts in the collaborative documents.
+Respond with emojis :+1: :scream_cat: to your colleagues' answers.
+- Think of projects of which you like the documentation. What do you like about them?
+- Think of projects for which you don’t like the documentation. What don’t you like about them? Are you missing anything?
+
+**NB: You can choose a mature library with lots of users for this exercise, but try to also think of less mature projects you had to collaborate on, or papers you had to reproduce.**
+
+### Exercise: Writing good comments
+Let's take a look at two example comments (comments in python start with `#`):
+#### Comment A
+```python
+# Now we check if temperature is larger then -50:
+if temperature > -50:
+    print('do something')
+```
+
+#### Comment B
+```python
+# We regard temperatures below -50 degrees as measurement errors
+if temperature > -50:
+    print('do something')
+```
+ Which of these comments is best? Can you explain why?
+ Write your answer in the collaborative document (before looking at others' answers)
+ 
+### Exercise: Adding in-code documentation
+
+ Update this code snippet so it is well-documented:
+
+ ```python
+ import pandas as pd
+ 
+ def x(a, print_columns=False):
+    b = pd.read_excel(a)
+    column_headers = list(b.columns.values)
+    if print_columns:
+        print("\n".join(column_headers))
+    return column_headers
+ ```
+ 1. One person screen-shares, discuss and together converge on a final solution. (8 minutes)
+ 2. Share final solution in collaborative document.
+
+
+ ### Exercise: Write a README file
+ You are going to write a README file for an example project.
+
+ #### The example project
+ Here's [the example project](https://github.com/escience-academy/coderefinery-documentation-example-project).
+ For this project we transformed the code snippets from the previous episode into a single script [analyse_spreadsheet.py](https://github.com/escience-academy/coderefinery-documentation-example-project/blob/main/analyse_spreadsheet.py)
+ 
+ Let's take a look at [the script](https://github.com/escience-academy/coderefinery-documentation-example-project/blob/main/analyse_spreadsheet.py). 
+ You don't need to understand the script completely, all you need to know is:
+ * The functions `mean_temperature` and `get_spreadsheet_columns` from previous episode are in there.
+ * We added a `main` function that is called when you run the script 
+ (you could run this python script by calling `python analyse_spreadsheet.py` on the command line). 
+ It will prompt the user for a file name, print the columns in the spreadsheet, and print the mean
+ temperature.
+ 
+ That's all there is to this project! (You can ignore the other files in the repository, we'll get back to them in episode 4)
+
+ #### The exercise (20 minutes)
+ 1. One person shares the screen and is the driver. The others are 'navigators' and tell the 'driver' what to do.
+ 1. Fork [the example project](https://github.com/escience-academy/coderefinery-documentation-example-project) to your own github namespace
+ 2. Add a file called `README.md` (you can use the github web interface or work locally (i.e. `git clone`, edit the file,  `git add`, `git commit`, `git push`))
+ 3. Add some content to your README file. Think about what you want the audience to know about your project! 
+    It does not matter whether the information is correct, it is more important that you have all the components that make up a good README file.
+ 4. Note that the README file is nicely rendered on the github repository page.
+
+ NB: The `README.md` file is written in 'Markdown' a very popular lightweight markup language, all you need to know for now is this syntax:
+ ```
+ # A section title
+ ## A subsection title
+ Normal text
+ 
+ A list with items
+ - item1
+ - item2
+ ```
+  
+ (Optional): Use [https://hemingwayapp.com/](https://hemingwayapp.com/) to analyse your README file and make your writing bold and clear!
+
+
+### Exercise: Github Pages (15 minutes)
+
+- Deploy own website reusing a template:
+    - Follow <https://pages.github.com/>
+    - Select "Project site"
+    - Select "Choose a theme" (for instance "Minimal")
+    - Click "Select theme"
+    - Adjust the README.md and commit
+    - Browse your page on `http://username.github.io/repository` (adjust "username" and "repository")
+- Make a change to the repository after the webpage has been deployed for the first time
+- Verify that the change shows up on the website a minute or two later
+
+ The documentation for GitHub Pages is very good so no need for us to duplicate
+ screenshots: <https://pages.github.com/>
+
+> #### Real-life examples
+>
+> - Research Software Hour
+>   - Source: <https://raw.githubusercontent.com/ResearchSoftwareHour/researchsoftwarehour.github.io/main/content/about.md>
+>   - Result: <https://researchsoftwarehour.github.io/about/>
+> - This lesson
+>   - Source: <https://raw.githubusercontent.com/coderefinery/documentation/gh-pages/_episodes/06-gh-pages.md>
+>   - Result: this page
+
+Paste a link to your github page in the collaborative document.
+
+
+### Recap modular coding, documentation + collaborative Git + Github
+* What questions do you still have?
+* Whether there are any incremental improvements that can benefit your projects?
+* What’s nice that we learnt but is overkill for your current work?
+
+## Day 4 Introduction to Continuous Integration
+
+### Exercise: Four functions to write tests for
+Start by discussing how you would design tests for the following four functions, and then try to write the tests. Below are the Python versions of the code, but you can also work on the C++, R, Julia or Fortran versions of the code. They can be supplied by one the helpers.
+# 1
+```python=
+def factorial(n):
+    """
+    Computes the factorial of n.
+    """
+    if n < 0:
+        raise ValueError('received negative input')
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
+```
+# 2
+```python=
+def count_word_occurrence_in_string(text, word):
+    """
+    Counts how often word appears in text.
+    Example: if text is "one two one two three four"
+             and word is "one", then this function returns 2
+    """
+    words = text.split()
+    return words.count(word)
+```
+# 3
+```python=
+def count_word_occurrence_in_file(file_name, word):
+    """
+    Counts how often word appears in file file_name.
+    Example: if file contains "one two one two three four"
+             and word is "one", then this function returns 2
+    """
+    count = 0
+    with open(file_name, 'r') as f:
+        for line in f:
+            words = line.split()
+            count += words.count(word)
+    return count
+```
+# 4
+```python=
+class Pet:
+    def __init__(self, name):
+        self.name = name
+        self.hunger = 0
+    def go_for_a_walk(self):  # <-- how would you test this function?
+        self.hunger += 1
+```
+
+### Exercise: Full-cycle collaborative workflow
+This is an expanded version of the automated testing demonstration. The exercise is performed in a collaborative circle within the exercise group (breakout room).
+
+The exercise takes 30-40 minutes.
+
+In this exercise, everybody will:
+
+A. Create a repository on GitHub/GitLab (everybody should use a different repository name for their repository)
+B. Commit code to the repository and set up tests with GitHub Actions/ GitLab CI
+C. Everybody will find a bug in their repository and open an issue in their repository
+D. Then each one will clone the repo of one of their exercise partners, fix the bug, and open a pull request (GitHub)/ merge request (GitLab)
+E. Everybody then merges their co-worker’s change
+
+![](https://i.imgur.com/UR6Qaue.png)
+Overview of this exercise. Below we detail the steps.
+
+#### Step 1: Create a new repository on GitHub/GitLab
+
+- Select a different repository name than your colleagues (otherwise forking the same name will be strange)
+- Before you create the repository, select “Initialize this repository with a README” (otherwise you try to clone an empty repo).
+- Share the repository URL with your exercise group via shared document or chat
+
+#### Step 2: Clone your own repository, add code, commit, and push
+
+Clone the repository.
+
+Add a file `example.py` containing:
+
+```python=
+def add(a, b):
+    return a + b
+
+
+def test_add():
+    assert add(2, 3) == 5
+    assert add('space', 'ship') == 'spaceship'
+
+
+def subtract(a, b):
+    return a + b  # <--- fix this in step 8
+
+
+# uncomment the following test in step 5
+#def test_subtract():
+#    assert subtract(2, 3) == -1
+
+```
+Test `example.py` with `pytest`.
+
+Then stage the file (`git add <filename>`), commit (`git commit -m "some commit message"`),
+and push the changes (`git push origin main`).
+
+
+#### Step 3: Enable automated testing
+
+In this step we will enable GitHub Actions.
+- Select "Actions" from your GitHub repository page. You get to a page "Get started with GitHub Actions". 
+- Select the button for "Set up this workflow" under Python Application.
+
+![](https://i.imgur.com/7QOplAg.png)
+Select “Python application” as the starter workflow.
+
+GitHub creates the following file for you in the subfolder `.github/workflows`:
+
+
+   ```yaml
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        pytest
+   ```
+
+Replace `pytest` by `pytest example.py`:
+```yaml
+   - name: Test with pytest
+     run: |
+       pytest example.py
+```
+![](https://i.imgur.com/1TFZPRe.png)
+
+
+Commit the change by pressing the "Start Commit" button.
+
+#### Step 4: Verify that tests have been automatically run
+
+Observe in the repository how the test succeeds. While the test is executing, the repository has a yellow marker.
+This is replaced with a green check mark, once the test succeeds.
+
+![](https://i.imgur.com/b8dI8XH.png)
+
+Green check means passed.
+
+Also browse the "Actions" tab and look at the steps there and their output.
+
+#### Step 5: Add a test which reveals a problem
+
+After you committed the workflow file, your GitHub/GitLab repository will be ahead of your local cloned repository. Update your local cloned repository:
+
+```
+$ git pull origin main
+```
+or 
+```
+$ git pull origin master
+```
+Next uncomment the code in `example.py` under “step 5”, commit, and push. Verify that the test suite now fails on the “Actions” tab (GitHub) or the “CI/CD->Pipelines” tab (GitLab).
+
+
+#### Step 6: Open and issue on GitHub/GitLab
+Open a new issue in your repository about the broken test (click the “Issues” button on GitHub or GitLab and write a title for the issue). The plan is that your colleague will fix the issue through a pull/merge request
+
+#### Step 7: Fork and clone the repository of your colleague
+
+Fork the repository using the GitHub/GitLab web interface. 
+
+Make sure you clone the fork after you have forked it. Do not clone your colleague’s repository directly.
+
+```
+$ $ git clone https://gitlab.com/your-username/the-repository.git
+```
+
+#### Step 8: Fix the broken test
+
+After you have fixed the code, commit the following commit message `"restore function subtract; fixes #1"` (assuming that you try to fix issue number 1).
+
+Then push to your fork.
+
+#### Step 9: Open a pull request (GitHub)/ merge request (GitLab)
+
+Then before accepting the pull request/ merge request from your colleague, observe how GitHub Actions/ Gitlab CI automatically tested the code.
+
+If you forgot to reference the issue number in the commit message, you can still add it to the pull request/ merge request: `my pull/merge request title, closes #NUMBEROFTHEISSUE`
+
+#### Step 10
+
+Observe how accepting the pull request/ merge request automatically closes the issue (provided the commit message or the pull request/ merge request contained the correct issue number).
+
+Discuss whether this is a useful feature. And if it is, why do you think is it useful?
+
+
+## Day4: Modular Code Design
+
+
+## Day 4: Testing lesson
+
+
+### Exercise : Discussion
+Why do you write tests/ Why do you not write tests? Write reasons into the collabroative document.
+
+### Excercise: Testing as part of the CI (15min)
+
+Add the following to your github actions workflow file from yesterday. 
+
+```
+    - name: Test with pytest
+      run: |
+        pytest example.py
+```
+
+
+Add these functions to your ``example.py``:
+```python=
+def add(a, b):
+    return a + b
+
+
+def test_add():
+    assert add(2, 3) == 5
+    assert add('space', 'ship') == 'spaceship'
+
+
+def subtract(a, b):
+    return a + b  # <--- fix this 
+
+
+# uncomment the following test
+#def test_subtract():
+#    assert subtract(2, 3) == -1
+```
+
+See what the CI does now and then uncomment the ``test_substract`` test.See what the CI does now, Afterwards fix the ``subtract`` function.
+
+
+### Exercise : Test design
+
+Pick one function from the following functions/classes. Write tests for it. Also test the error condition:
+```python
+#1
+def factorial(n):
+    """
+    Computes the factorial of n.
+    """
+    if n < 0:
+        raise ValueError('received negative input')
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
+
+
+# 2
+def count_word_occurrence_in_string(text, word):
+    """
+    Counts how often word appears in text.
+    Example: if text is "one two one two three four"
+             and word is "one", then this function returns 2
+    """
+    words = text.split()
+    return words.count(word)
+
+
+# 3
+def count_word_occurrence_in_file(file_name, word):
+    """
+    Counts how often word appears in file file_name.
+    Example: if file contains "one two one two three four"
+             and word is "one", then this function returns 2
+    """
+    count = 0
+    with open(file_name, 'r') as f:
+        for line in f:
+            words = line.split()
+            count += words.count(word)
+    return count
+
+
+# 4
+def check_reactor_temperature(temperature_celsius):
+    """
+    Checks whether temperature is above max_temperature
+    and returns a status.
+    """
+    from reactor import max_temperature
+    if temperature_celsius > max_temperature:
+        status = 1
+    else:
+        status = 0
+    return status
+
+
+# 5
+class Pet:
+    def __init__(self, name):
+        self.name = name
+        self.hunger = 0
+    def go_for_a_walk(self):  # <-- how would you test this function?
+        self.hunger += 1
+        
+```
+</section>
+
+      </div>
+    </div>
+
+    <script src="reveal.js/4.3.1/reveal.js/dist/reveal.js"></script>
+    <script src="reveal.js/4.3.1/reveal.js/plugin/zoom/zoom.js"></script>
+    <script src="reveal.js/4.3.1/reveal.js/plugin/math/math.js"></script>
+    <script src="reveal.js/4.3.1/reveal.js/plugin/notes/notes.js"></script>
+    <script src="reveal.js/4.3.1/reveal.js/plugin/search/search.js"></script>
+    <script src="reveal.js/4.3.1/reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="reveal.js/4.3.1/reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="reveal.js/4.3.1/reveal.js-plugins/menu/menu.js"></script>
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="reveal.js/4.3.1/reveal.js-plugins/menu/font-awesome/css/fontawesome.css">
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+          themes: false,
+          transitions: false,
+          markers: true,
+          hideMissingTitles: true,
+        },
+        dependencies: [
+          {src: 'reveal.js/4.3.1/reveal.js-plugins/reveal.js-d3/reveald3.js'}
+        ],
+        plugins: [ RevealMarkdown, RevealHighlight, RevealMath.KaTeX, RevealMenu, RevealNotes, RevealSearch, RevealZoom ]
+      });
+    </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var decoration = $('#decoration').html();
+      if ( window.location.search.match( /print-pdf/gi ) ) {
+        // for pdf export
+        // 3. On Reveal.js ready event, copy decoration <div> into each `.slide-background` <div>
+        Reveal.addEventListener( 'ready', function( event ) {
+          $('.slide-background').append(decoration);
+        });
+      }
+      else {
+        // for viewing slides
+        $('div.reveal').append(decoration);
+        $('#decoration').remove(); // without this the fadeIn/fadeOut below does not work. why is this necessary?
+      };
+      function setLogoStyle(style) {
+        //style must be one of {"logo_color","logo_white","logo_part_white"}
+
+        //unset everything
+        document.getElementById("logo_color").style.opacity = 0;
+        document.getElementById("logo_white").style.opacity = 0;
+        document.getElementById("logo_part_white").style.opacity = 0;
+
+        //set only what we want
+        document.getElementById(style).style.opacity = 1;
+      };
+      var overview_shown = false;
+      function getOpacity(data_state) {
+        var opacity = 0.8;
+        for (let i = 0; i < 11; i++) {
+          if (data_state.includes(i)) { opacity = i/10; console.log("opacity set to " + opacity)}
+        };
+        return opacity
+      };
+      function addDecorations() {
+        console.log("== set decorations ==")
+        var currentSlide = Reveal.getCurrentSlide();
+        console.log(currentSlide.querySelector("footer"));
+        if (currentSlide.contains(currentSlide.querySelector('footer')))
+        {
+          document.getElementById("footer").innerHTML = currentSlide.querySelector('footer').innerHTML;
+          document.getElementById("blue_strip").style.right = 0;
+          console.log("footer (and blue_strip)");
+        } else {
+          document.getElementById("blue_strip").style.right = "-" + document.getElementById("blue_strip").offsetWidth + "px";
+          console.log("no footer");
+        };
+        if ( currentSlide.getAttribute('data-state') )
+        {
+          var data_state = currentSlide.getAttribute('data-state')
+          var opacity = getOpacity(data_state);
+          console.log("DS" + data_state)
+          // pre-set slide designs
+
+          // standard
+          if ( data_state.includes("standard"))
+          {
+            data_state += " logo yellow_flag white_overlay";
+          };
+
+          // two_pane
+          if ( data_state.includes("two_pane"))
+          {
+            data_state += " logo yellow_flag white_overlay blue_pane_right";
+          };
+
+          // about
+          if ( data_state.includes("about"))
+          {
+            data_state += " logo white_overlay blue_pane_left purple_half_circle_top purple_strip_bottom yellow_half_strip";
+          };
+
+          // touch
+          if ( data_state.includes("touch"))
+          {
+            data_state += " logo blue_overlay touch_pane purple_blob right_e_bottom";
+          };
+
+          // individual elements
+
+          // purple overlay
+          if ( data_state.includes("purple_overlay"))
+          {
+            document.getElementById("purple_overlay").style.opacity = opacity;
+            document.getElementById("purple_overlay").style.transform = "translateY(0)";
+            document.getElementById("logo_color").style.opacity = 0;
+            document.getElementById("logo_white").style.opacity = 0;
+            document.getElementById("logo_part_white").style.opacity = 1;
+            currentSlide.classList.remove("has-light-background");
+            console.log("purple overlay");
+          } else {
+            document.getElementById("purple_overlay").style.opacity = 0;
+            console.log("no purple overlay");
+          };
+
+          // white overlay
+          if ( data_state.includes("white_overlay"))
+          {
+            document.getElementById("white_overlay").style.opacity = opacity;
+            document.getElementById("white_overlay").style.transform = "translateY(0)";
+            document.getElementById("logo_color").style.opacity = 1;
+            document.getElementById("logo_white").style.opacity = 0;
+            document.getElementById("logo_part_white").style.opacity = 0;
+            currentSlide.classList.add("has-light-background");
+            console.log("white overlay");
+          } else {
+            document.getElementById("white_overlay").style.opacity = 0;
+            console.log("no white overlay");
+          };
+
+          // black overlay
+          if ( data_state.includes("black_overlay"))
+          {
+            document.getElementById("black_overlay").style.opacity = opacity;
+            document.getElementById("black_overlay").style.transform = "translateY(0)";
+            document.getElementById("logo_color").style.opacity = 0;
+            document.getElementById("logo_white").style.opacity = 0;
+            document.getElementById("logo_part_white").style.opacity = 1;
+            currentSlide.classList.remove("has-light-background");
+            console.log("black overlay");
+          } else {
+            document.getElementById("black_overlay").style.opacity = 0;
+            console.log("no black overlay");
+          };
+
+          // blue overlay
+          if ( data_state.includes("blue_overlay"))
+          {
+            document.getElementById("blue_overlay").style.opacity = opacity;
+            document.getElementById("blue_overlay").style.transform = "translateY(0)";
+            document.getElementById("logo_color").style.opacity = 0;
+            document.getElementById("logo_white").style.opacity = 1;
+            document.getElementById("logo_part_white").style.opacity = 0;
+            currentSlide.classList.remove("has-light-background");
+            console.log("blue overlay");
+          } else {
+            document.getElementById("blue_overlay").style.opacity = 0;
+            console.log("no blue overlay");
+          };
+
+          // blue pane right
+          if ( data_state.includes("blue_pane_right"))
+          {
+            document.getElementById("blue_pane_right").style.opacity = 1;
+            currentSlide.classList.remove("has-dark-background");
+            currentSlide.classList.add("has-light-background");
+            console.log("blue_pane_right");
+          } else {
+            document.getElementById("blue_pane_right").style.opacity = 0;
+            console.log("no blue_pane_right");
+          };
+
+          // blue pane left
+          if ( data_state.includes("blue_pane_left"))
+          {
+            document.getElementById("blue_pane_left").style.opacity = 1;
+            setLogoStyle("logo_white");
+            currentSlide.classList.remove("has-dark-background");
+            currentSlide.classList.add("has-light-background");
+            console.log("blue_pane_left");
+          } else {
+            document.getElementById("blue_pane_left").style.opacity = 0;
+            console.log("no blue_pane_left");
+          };
+
+          // touch pane
+          if ( data_state.includes("touch_pane"))
+          {
+            document.getElementById("touch_pane").style.opacity = 1;
+            setLogoStyle("logo_color");
+            currentSlide.classList.remove("has-light-background");
+            currentSlide.classList.add("has-dark-background");
+            console.log("touch_pane");
+          } else {
+            document.getElementById("touch_pane").style.opacity = 0;
+            console.log("no touch_pane");
+          };
+
+          // logo
+          if ( data_state.includes("logo"))
+          {
+            document.getElementById("logo_color").style.left = 3 + "vw";
+            document.getElementById("logo_part_white").style.left = 3 + "vw";
+            document.getElementById("logo_white").style.left = 3 + "vw";
+            console.log("logo");
+          } else {
+            document.getElementById("logo_color").style.left = -12 + "vw";
+            document.getElementById("logo_part_white").style.left = -12 + "vw";
+            document.getElementById("logo_white").style.left = -12 + "vw";
+            console.log("no logo");
+          };
+
+          // yellow strip
+          if ( data_state.includes("yellow_strip"))
+          {
+            document.getElementById("yellow_strip").style.left = 0;
+            console.log("yellow_strip");
+          } else {
+            document.getElementById("yellow_strip").style.left = -10 + "vw";
+            console.log("no yellow_strip");
+          };
+
+          // yellow flag
+          if ( data_state.includes("yellow_flag"))
+          {
+            document.getElementById("yellow_flag").style.left = 0;
+            console.log("yellow_flag");
+          } else {
+            document.getElementById("yellow_flag").style.left = -10 + "vh";
+            console.log("no yellow_flag");
+          };
+
+          // purple half circle top
+          if ( data_state.includes("purple_half_circle_top"))
+          {
+            document.getElementById("purple_half_circle_top").style.top = 0;
+            setLogoStyle("logo_part_white");
+            console.log("purple_half_circle_top");
+          } else {
+            document.getElementById("purple_half_circle_top").style.top = -17 + "vw";
+            console.log("no purple_half_circle_top");
+          };
+
+          // purple half circle bottom
+          if ( data_state.includes("purple_half_circle_bottom"))
+          {
+            document.getElementById("purple_half_circle_bottom").style.bottom = 0;
+            document.getElementById("yellow_flag").style.bottom = 20 + "vh";
+            console.log("purple_half_circle_bottom");
+          } else {
+            document.getElementById("purple_half_circle_bottom").style.bottom = -10 + "vw";
+            document.getElementById("yellow_flag").style.bottom = 5 + "vh";
+            console.log("no purple_half_circle_bottom");
+          };
+
+          // purple strip bottom
+          if ( data_state.includes("purple_strip_bottom"))
+          {
+            document.getElementById("purple_strip_bottom").style.bottom = 0;
+            console.log("purple_strip_bottom");
+          } else {
+            document.getElementById("purple_strip_bottom").style.bottom = -10 + "vw";
+            console.log("no purple_strip_bottom");
+          };
+
+          // yellow_half_strip
+          if ( data_state.includes("yellow_half_strip"))
+          {
+            document.getElementById("yellow_half_strip").style.bottom = 0;
+            console.log("yellow_half_strip");
+          } else {
+            document.getElementById("yellow_half_strip").style.bottom = -25 + "vw";
+            console.log("no yellow_half_strip");
+          };
+
+          // purple blob
+          if ( data_state.includes("purple_blob"))
+          {
+            document.getElementById("purple_blob").style.top = 0;
+            console.log("purple_blob");
+          } else {
+            document.getElementById("purple_blob").style.top = -50 + "vh";
+            console.log("no purple_blob");
+          };
+
+          // right_e
+          if ( data_state.includes("right_e_top"))
+          {
+            document.getElementById("right_e").style.top = 10 + "vh";
+            document.getElementById("right_e").style.right = 0;
+            console.log("right_e_top");
+          } else if ( data_state.includes("right_e_bottom")){
+            document.getElementById("right_e").style.top = 60 + "vh";
+            document.getElementById("right_e").style.right = 0;
+            console.log("right_e_bottom");
+          } else {
+            document.getElementById("right_e").style.right = -4 + "vw";
+            console.log("no right_e");
+          };
+
+          // clear the background so that the overlays don't interfere
+          // with underlying iframe
+          if ( data_state.includes("clear_background"))
+          {
+            document.getElementById("purple_overlay").style.transform = "translateY(100vh)";
+            document.getElementById("white_overlay").style.transform = "translateY(100vh)";
+            document.getElementById("black_overlay").style.transform = "translateY(100vh)";
+            document.getElementById("blue_overlay").style.transform = "translateY(100vh)";
+            document.getElementById("blue_pane_right").style.transform = "translateY(100vh)";
+            document.getElementById("blue_pane_left").style.transform = "translateY(100vh)";
+            document.getElementById("touch_pane").style.transform = "translateY(100vh)";
+          };
+        }
+        else
+        {
+          console.log("nothing special")
+        };
+      };
+
+      function removeDecorations() {
+        console.log("removeDecorations")
+        document.getElementById("purple_overlay").style.opacity = 0;
+        document.getElementById("white_overlay").style.opacity = 0;
+        document.getElementById("black_overlay").style.opacity = 0;
+        document.getElementById("blue_overlay").style.opacity = 0;
+        document.getElementById("blue_pane_right").style.opacity = 0;
+        document.getElementById("blue_pane_left").style.opacity = 0;
+        document.getElementById("touch_pane").style.opacity = 0;
+        document.getElementById("logo_color").style.left = -12 + "vw";
+        document.getElementById("logo_part_white").style.left = -12 + "vw";
+        document.getElementById("logo_white").style.left = -12 + "vw";
+        document.getElementById("yellow_strip").style.left = -10 + "vw";
+        document.getElementById("yellow_flag").style.left = -10 + "vh";
+        document.getElementById("purple_half_circle_top").style.top = -17 + "vw";
+        document.getElementById("purple_half_circle_bottom").style.bottom = -10 + "vw";
+        document.getElementById("purple_strip_bottom").style.bottom = -10 + "vw";
+        document.getElementById("yellow_half_strip").style.bottom = -25 + "vw";
+        document.getElementById("purple_blob").style.top = -50 + "vh";
+        document.getElementById("right_e").style.right = -4 + "vw";
+        document.getElementById("blue_strip").style.right = "-" + document.getElementById("blue_strip").offsetWidth + "px";
+      };
+
+      Reveal.on( 'slidechanged', event => {
+        if (overview_shown == false)
+        {
+          addDecorations();
+        }
+      });
+      Reveal.on( 'overviewshown', event => {
+        overview_shown = true;
+        removeDecorations();
+      });
+      Reveal.on( 'overviewhidden', event => {
+        overview_shown = false;
+        addDecorations();
+      });
+    </script>
+
+  </body>
+</html>
