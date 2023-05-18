@@ -3,8 +3,7 @@
 2:00 hours
 
 ### Instructor Notes
-Use [these slides](../files/04-modular-coding-slides.svg) to explain the topic of modular code development 
-(NB the slides are very visual so you need to create your own story around it). 
+Use [these slides](../content/04-modular-code/index.html) to explain the topic of modular code development.
 
-Then we follow [this instructor guide](https://coderefinery.github.io/modular-type-along/instructor-guide/)
-and interactively make a piece of code more modular.
+The [code refinery instructor guide](https://coderefinery.github.io/modular-type-along/instructor-guide/)
+can be followed to interactively make a piece more modular. Alternatively, there is an exercise in the [exercise document](../content/excercises-document.md) on extracting functions from an awful piece of ChatGPT-generated nested code that can be done.
