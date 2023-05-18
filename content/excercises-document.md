@@ -1,5 +1,5 @@
 
-## Day 1 Version control 
+## Day 1 Version control
 ### Tracking changes exercise
 Exercise in breakout rooms. Write down your (individual) answers to the next 3 questions in the collaborative notebook.
 #### 1. Which command(s) below would save the changes of myfile.txt to my local Git repository?
@@ -36,7 +36,7 @@ Luckily, she has been keeping track of her project’s versions using Git! Which
 3. `$ git checkout HEAD~1 data_cruncher.py`
 4.  ` $ git checkout <unique ID of last commit> data_cruncher.py`
 5. Both 2 and 4
-    
+
 #### 2. Reverting a Commit
 
 Jennifer is collaborating on her Python script with her colleagues and realizes her last commit to the project’s repository contained an error and she wants to undo it. `git revert [erroneous commit ID]` will create a new commit that reverses Jennifer’s erroneous commit. Therefore `git revert` is different to `git checkout [commit ID]` because `git checkout` returns the files within the local repository to a previous state, whereas `git revert` reverses changes committed to the local and project repositories.
@@ -128,11 +128,125 @@ In this lesson, we introduced the `“git push”` command. How is `“git push�
 - (Optionally) learn about [merge conflicts](https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts) and try it out in your collaboration.
 
 
-## Day 3 Documentation
+## Day 3: Modular code design
+
+Take a look at the following (terrible) code.
+
+Extract functions from it.
+
+Some things to keep in mind:
+- Keep the functions pure (i.e.: no interaction with their environment)
+- Good interfaces (input/output) make them testable
+- Use good naming practices to describe the functionality
+
+```python=
+def convert_temperature(temperature, unit):
+    if unit == "F":
+        # Convert Fahrenheit to Celsius
+        celsius = (temperature - 32) * (5 / 9)
+        if celsius < -273.15:
+            # Invalid temperature, below absolute zero
+            return "Invalid temperature"
+        else:
+            # Convert Celsius to Kelvin
+            kelvin = celsius + 273.15
+            if kelvin < 0:
+                # Invalid temperature, below absolute zero
+                if temperature % 2 == 0:
+                    return "Invalid temperature"
+                else:
+                    if kelvin % 2 == 0:
+                        return "Invalid temperature"
+                    else:
+                        return celsius, kelvin
+            else:
+                if celsius % 2 == 0:
+                    # Convert Celsius to Fahrenheit
+                    fahrenheit = (celsius * (9 / 5)) + 32
+                    if fahrenheit < -459.67:
+                        # Invalid temperature, below absolute zero
+                        return "Invalid temperature"
+                    else:
+                        if fahrenheit % 2 == 0:
+                            return fahrenheit, kelvin
+                        else:
+                            return fahrenheit, celsius
+                else:
+                    return celsius, kelvin
+    elif unit == "C":
+        # Convert Celsius to Fahrenheit
+        fahrenheit = (temperature * (9 / 5)) + 32
+        if fahrenheit < -459.67:
+            # Invalid temperature, below absolute zero
+            return "Invalid temperature"
+        else:
+            # Convert Celsius to Kelvin
+            kelvin = temperature + 273.15
+            if kelvin < 0:
+                # Invalid temperature, below absolute zero
+                if temperature % 2 == 0:
+                    return "Invalid temperature"
+                else:
+                    if kelvin % 2 == 0:
+                        return "Invalid temperature"
+                    else:
+                        return fahrenheit, kelvin
+            else:
+                if temperature % 2 == 0:
+                    # Convert Celsius to Fahrenheit
+                    fahrenheit = (temperature * (9 / 5)) + 32
+                    if fahrenheit < -459.67:
+                        # Invalid temperature, below absolute zero
+                        return "Invalid temperature"
+                    else:
+                        if fahrenheit % 2 == 0:
+                            return fahrenheit, kelvin
+                        else:
+                            return fahrenheit, temperature
+                else:
+                    return fahrenheit, kelvin
+    elif unit == "K":
+        # Convert Kelvin to Celsius
+        celsius = temperature - 273.15
+        if celsius < -273.15:
+            # Invalid temperature, below absolute zero
+            return "Invalid temperature"
+        else:
+            # Convert Celsius to Fahrenheit
+            fahrenheit = (celsius * (9 / 5)) + 32
+            if fahrenheit < -459.67:
+                # Invalid temperature, below absolute zero
+                return "Invalid temperature"
+            else:
+                if celsius % 2 == 0:
+                    # Convert Celsius to Fahrenheit
+                    fahrenheit = (celsius * (9 / 5)) + 32
+                    if fahrenheit < -459.67:
+                        # Invalid temperature, below absolute zero
+                        return "Invalid temperature"
+                    else:
+                        if fahrenheit % 2 == 0:
+                            return fahrenheit, celsius
+                        else:
+                            return fahrenheit, kelvin
+                else:
+                    return celsius, fahrenheit
+    else:
+        return "Invalid unit"
+
+```
+
+### Points for discussion (do not copy this into the collaborative doc):
+- the fact that something works does not make it good code
+- extracting modules and naming them makes the code more readable
+- there are various bits in the code that do not make sense. Extracting them makes it easier to highlight (i.e. the %2 == 0 clauses) and question these.
+- duplicate code does not always look like duplicate code. Thinking in modules will help identify them.
+
+
 ## Day 3: Documentation lesson
 
 
-### Exercise: Think of good and bad examples 
+### Exercise: Think of good and bad examples
 Write down your thoughts in the collaborative documents.
 Respond with emojis :+1: :scream_cat: to your colleagues' answers.
 - Think of projects of which you like the documentation. What do you like about them?
@@ -157,14 +271,14 @@ if temperature > -50:
 ```
  Which of these comments is best? Can you explain why?
  Write your answer in the collaborative document (before looking at others' answers)
- 
+
 ### Exercise: Adding in-code documentation
 
  Update this code snippet so it is well-documented:
 
  ```python
  import pandas as pd
- 
+
  def x(a, print_columns=False):
     b = pd.read_excel(a)
     column_headers = list(b.columns.values)
@@ -182,22 +296,22 @@ if temperature > -50:
  #### The example project
  Here's [the example project](https://github.com/escience-academy/coderefinery-documentation-example-project).
  For this project we transformed the code snippets from the previous episode into a single script [analyse_spreadsheet.py](https://github.com/escience-academy/coderefinery-documentation-example-project/blob/main/analyse_spreadsheet.py)
- 
- Let's take a look at [the script](https://github.com/escience-academy/coderefinery-documentation-example-project/blob/main/analyse_spreadsheet.py). 
+
+ Let's take a look at [the script](https://github.com/escience-academy/coderefinery-documentation-example-project/blob/main/analyse_spreadsheet.py).
  You don't need to understand the script completely, all you need to know is:
  * The functions `mean_temperature` and `get_spreadsheet_columns` from previous episode are in there.
- * We added a `main` function that is called when you run the script 
- (you could run this python script by calling `python analyse_spreadsheet.py` on the command line). 
+ * We added a `main` function that is called when you run the script
+ (you could run this python script by calling `python analyse_spreadsheet.py` on the command line).
  It will prompt the user for a file name, print the columns in the spreadsheet, and print the mean
  temperature.
- 
+
  That's all there is to this project! (You can ignore the other files in the repository, we'll get back to them in episode 4)
 
  #### The exercise (20 minutes)
  1. One person shares the screen and is the driver. The others are 'navigators' and tell the 'driver' what to do.
  1. Fork [the example project](https://github.com/escience-academy/coderefinery-documentation-example-project) to your own github namespace
  2. Add a file called `README.md` (you can use the github web interface or work locally (i.e. `git clone`, edit the file,  `git add`, `git commit`, `git push`))
- 3. Add some content to your README file. Think about what you want the audience to know about your project! 
+ 3. Add some content to your README file. Think about what you want the audience to know about your project!
     It does not matter whether the information is correct, it is more important that you have all the components that make up a good README file.
  4. Note that the README file is nicely rendered on the github repository page.
 
@@ -206,12 +320,12 @@ if temperature > -50:
  # A section title
  ## A subsection title
  Normal text
- 
+
  A list with items
  - item1
  - item2
  ```
-  
+
  (Optional): Use [https://hemingwayapp.com/](https://hemingwayapp.com/) to analyse your README file and make your writing bold and clear!
 
 
@@ -356,7 +470,7 @@ and push the changes (`git push origin main`).
 #### Step 3: Enable automated testing
 
 In this step we will enable GitHub Actions.
-- Select "Actions" from your GitHub repository page. You get to a page "Get started with GitHub Actions". 
+- Select "Actions" from your GitHub repository page. You get to a page "Get started with GitHub Actions".
 - Select the button for "Set up this workflow" under Python Application.
 
 ![](https://i.imgur.com/7QOplAg.png)
@@ -433,7 +547,7 @@ After you committed the workflow file, your GitHub/GitLab repository will be ahe
 ```
 $ git pull origin main
 ```
-or 
+or
 ```
 $ git pull origin master
 ```
@@ -445,7 +559,7 @@ Open a new issue in your repository about the broken test (click the “Issues�
 
 #### Step 7: Fork and clone the repository of your colleague
 
-Fork the repository using the GitHub/GitLab web interface. 
+Fork the repository using the GitHub/GitLab web interface.
 
 Make sure you clone the fork after you have forked it. Do not clone your colleague’s repository directly.
 
@@ -472,8 +586,6 @@ Observe how accepting the pull request/ merge request automatically closes the i
 Discuss whether this is a useful feature. And if it is, why do you think is it useful?
 
 
-## Day4: Modular Code Design
-
 
 ## Day 4: Testing lesson
 
@@ -483,7 +595,7 @@ Why do you write tests/ Why do you not write tests? Write reasons into the colla
 
 ### Excercise: Testing as part of the CI (15min)
 
-Add the following to your github actions workflow file from yesterday. 
+Add the following to your github actions workflow file from yesterday.
 
 ```
     - name: Test with pytest
@@ -504,7 +616,7 @@ def test_add():
 
 
 def subtract(a, b):
-    return a + b  # <--- fix this 
+    return a + b  # <--- fix this
 
 
 # uncomment the following test
@@ -579,5 +691,5 @@ class Pet:
         self.hunger = 0
     def go_for_a_walk(self):  # <-- how would you test this function?
         self.hunger += 1
-        
+
 ```
