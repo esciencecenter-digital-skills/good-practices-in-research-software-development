@@ -1,0 +1,17 @@
+name: coderefinery
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - matplotlib=3.7.1
+  - myst-parser=0.18.1
+  - nbdime=3.1.1
+  - numpy=1.25.2
+  - pandas=2.0.3
+  - pytest=7.4.0
+  - pytest-cov=4.0.0
+  - snakemake-minimal=7.22.0
+  - sphinx=5.3.0
+  - sphinx-autobuild=2021.3.14
+  - sphinx_rtd_theme=1.2.0
