@@ -96,6 +96,14 @@ def convert_temperature(temperature, unit):
     Raises:
         ValueError: If the unit is not "C", "F", or "K".
         ValueError: If the temperature is below absolute zero for the given unit.
+
+    Examples:
+        >>> convert_temperature(32, "F")
+        (0.0, 273.15)
+        >>> convert_temperature(0, "C")
+        (32.0, 273.15)
+        >>> convert_temperature(273.15, "K")
+        (0.0, -459.67)
     """
     if not check_unit_validity(unit):
         raise ValueError("Invalid unit")
