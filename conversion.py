@@ -48,3 +48,7 @@ def convert_temperature(temperature, unit):
                 return celsius, fahrenheit
     else:
         return "Invalid unit"
+
+# to run
+if __name__ == "__main__":
+    print(convert_temperature(0, "C"))
