@@ -5,7 +5,7 @@
 ### Instructor Notes
 Lesson material: https://swcarpentry.github.io/git-novice/
 Slides (optional, but nice and helpful to show): https://nlesc-slides.github.io/2023-06-19-ds-cr/git/. This is our suggestion for when to use the slides:
-- Slides 0 - 4: right before episode 1 (Automated Version Control)
+- Slides 0 - 4: accompanying episode 1 (Automated Version Control)
 - Slides 5 - 9: right after episode 4 (Tracking Changes)
 
 NB: Optional day before the course starts for participants who don’t know the git basics yet.
