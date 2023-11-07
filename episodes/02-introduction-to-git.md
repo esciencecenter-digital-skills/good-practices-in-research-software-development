@@ -3,7 +3,12 @@
 3:12 hours (this is according to the carpentries, but it is not accurate, see below)
 
 ### Instructor Notes
-Lesson material: https://swcarpentry.github.io/git-novice/ 
+Lesson material: https://swcarpentry.github.io/git-novice/
+Slides (optional, but nice and helpful to show): https://nlesc-slides.github.io/2023-06-19-ds-cr/git/. This is our suggestion for when to use the slides:
+- Slides 0 - 4: accompanying episode 1 (Automated Version Control)
+- Slides 5 - 9: accompanying episode 4 (Tracking Changes)
+
+The slides provide visual context to the concepts that are used in the live coding. Especially for episode 4 (Tracking Changes) it would be best to have both the live coding screen and the slides screen side by side. As this is in general not possible, it is best to switch back and forth between command line and slides when necessary (you can use the images in the teaching material as indication when to switch to the slides).
 
 NB: Optional day before the course starts for participants who don’t know the git basics yet.
 
